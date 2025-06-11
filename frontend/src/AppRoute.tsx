@@ -1,13 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./global.css";
+import Layout from "./layout/layout";
 
 const AppRoute = () => {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<p className="text-2xl font-bold">This is home</p>}
-      />
+      <Route path="/" element={<Layout>This is home</Layout>} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
