@@ -1,5 +1,21 @@
 const User = require("../models/user");
 
+const getCurrentUser = async (req, res) => {
+  try {
+    console.log(req.userId);
+
+    const currentUser = await User.findOne({ _id: req.userId });
+    if (!currentUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(currentUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Unable to get user" });
+  }
+};
+
 const createCurrentUser = async (req, res) => {
   try {
     const { auth0Id } = req.body;
@@ -19,4 +35,4 @@ const createCurrentUser = async (req, res) => {
   }
 };
 
-module.exports = { createCurrentUser };
+module.exports = { createCurrentUser, getCurrentUser };

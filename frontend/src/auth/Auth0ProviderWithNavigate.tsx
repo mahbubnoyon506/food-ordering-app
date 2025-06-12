@@ -5,10 +5,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-type AppState = {
-  returnTo?: string;
-};
-
 const Auth0ProviderWithNavigate = ({ children }: Props) => {
   const navigate = useNavigate();
 
@@ -21,7 +17,7 @@ const Auth0ProviderWithNavigate = ({ children }: Props) => {
     throw new Error("unable to initialise auth");
   }
 
-  const onRedirectCallback = (appState?: AppState) => {
+  const onRedirectCallback = (appState?: { returnTo?: string }) => {
     navigate(appState?.returnTo || "/auth-callback");
   };
 
