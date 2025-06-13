@@ -4,7 +4,8 @@ const MyUserController = require("../controllers/MyUserController");
 const { jwtCheck, jwtParse } = require("../middleware/auth");
 const { validateMyUserRequest } = require("../middleware/validation");
 
-router.get("/", MyUserController.getCurrentUser);
+// /api/my/user
+router.get("/", jwtCheck, jwtParse, MyUserController.getCurrentUser);
 router.post("/", jwtCheck, MyUserController.createCurrentUser);
 router.put(
   "/",

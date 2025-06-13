@@ -2,8 +2,6 @@ const User = require("../models/user");
 
 const getCurrentUser = async (req, res) => {
   try {
-    console.log(req.userId);
-
     const currentUser = await User.findOne({ _id: req.userId });
     if (!currentUser) {
       return res.status(404).json({ message: "User not found" });
@@ -58,4 +56,4 @@ const updateCurrentUser = async (req, res) => {
   }
 };
 
-module.exports = { createCurrentUser, getCurrentUser, updateCurrentUser };
+module.exports = { getCurrentUser, createCurrentUser, updateCurrentUser };
