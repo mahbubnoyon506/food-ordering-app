@@ -29,6 +29,7 @@ export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
   onSave: (userProfileData: UserFormData) => void;
+  isLoading: boolean;
 };
 
 const UserProfileForm = ({ onSave, isLoading }: Props) => {
@@ -123,7 +124,7 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
         {isLoading ? (
           <LoadingButton />
         ) : (
-          <Button type="submit" className="bg-orange-500">
+          <Button type="submit" className="bg-orange-500 cursor-pointer">
             Submit
           </Button>
         )}
