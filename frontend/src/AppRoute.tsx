@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import ProtectedRoute from "./auth/ProtectedRoute";
-import Layout from "./layout/Layout";
+import Layout from "./layouts/Layout";
 
 const AppRoute = () => {
   return (
