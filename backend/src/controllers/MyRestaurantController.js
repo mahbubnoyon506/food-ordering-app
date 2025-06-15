@@ -2,6 +2,19 @@ const cloudinary = require("cloudinary");
 const mongoose = require("mongoose");
 const Restaurant = require("../models/restaurant");
 
+const getMyRestaurant = async (req, res) => {
+  try {
+    const restaurant = await Restaurant.findOne({ user: req.userId });
+    if (!restaurant) {
+      return res.status(404).json({ message: "restaurant not found" });
+    }
+    res.json(restaurant);
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({ message: "Error fetching restaurant" });
+  }
+};
+
 const createMyRestaurant = async (req, res) => {
   try {
     const existingRestaurant = await Restaurant.findOne({ user: req.userId });
@@ -36,4 +49,4 @@ const uploadImage = async (file) => {
   return uploadResponse.url;
 };
 
-module.exports = { createMyRestaurant };
+module.exports = { getMyRestaurant, createMyRestaurant };
