@@ -40,7 +40,7 @@ const createMyRestaurant = async (req, res) => {
   }
 };
 
-const updateMyRestaurant = async (require, res) => {
+const updateMyRestaurant = async (req, res) => {
   try {
     const restaurant = await Restaurant.findOne({
       user: req.userId,
