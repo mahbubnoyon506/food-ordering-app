@@ -40,7 +40,7 @@ const searchRestaurant = async (req, res) => {
       ];
     }
 
-    const pageSize = 10;
+    const pageSize = 2;
     const skip = (page - 1) * pageSize;
 
     // sortOption = "lastUpdated"
