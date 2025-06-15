@@ -1,5 +1,7 @@
 const express = require("express");
+const { param } = require("express-validator");
 const router = express.Router();
+const RestaurantController = require("../controllers/RestaurantController");
 
 router.get(
   "/search/:city",
