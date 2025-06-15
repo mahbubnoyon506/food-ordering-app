@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const MyRestaurantController = require("../controllers/MyRestaurantController");
+const { validateMyRestaurantRequest } = require("../middleware/validation");
+const { jwtCheck, jwtParse } = require("../middleware/auth");
 
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -14,9 +16,9 @@ const upload = multer({
 router.post(
   "/",
   upload.single("imageFile"),
-  //   validateMyRestaurantRequest,
-  //   jwtCheck,
-  //   jwtParse,
+  validateMyRestaurantRequest,
+  jwtCheck,
+  jwtParse,
   MyRestaurantController.createMyRestaurant
 );
 
