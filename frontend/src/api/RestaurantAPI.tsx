@@ -25,9 +25,16 @@ export const useSearchRestaurants = (
   };
 
   const { data: results, isLoading } = useQuery({
-    queryKey: ["searchRestaurants"],
+    queryKey: [
+      "searchRestaurants",
+      city,
+      searchState.searchQuery,
+      searchState.page,
+      searchState.selectedCuisines,
+      searchState.sortOption,
+    ],
     queryFn: createSearchRequest,
-    // { enabled: !!city }
+    enabled: !!city,
   });
 
   return {
