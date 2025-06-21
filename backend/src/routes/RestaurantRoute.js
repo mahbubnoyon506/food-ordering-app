@@ -4,6 +4,16 @@ const router = express.Router();
 const RestaurantController = require("../controllers/RestaurantController");
 
 router.get(
+  "/:restaurantId",
+  param("restaurantId")
+    .isString()
+    .trim()
+    .notEmpty()
+    .withMessage("RestaurantId paramenter must be a valid string"),
+  RestaurantController.getRestaurant
+);
+
+router.get(
   "/search/:city",
   param("city")
     .isString()
