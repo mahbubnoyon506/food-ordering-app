@@ -15,6 +15,7 @@ cloudinary.config({
 const myUserRoute = require("./routes/MyUserRoute");
 const myRestaurantRoute = require("./routes/MyRestaurantRoute");
 const restaurantRoute = require("./routes/RestaurantRoute");
+const orderRoute = require("./routes/OrderRoute")
 
 const app = express();
 const PORT = process.env.PORT || 7000;
@@ -36,6 +37,7 @@ app.get("/health", async (req, res) => {
 app.use("/api/my/user", myUserRoute);
 app.use("/api/my/restaurant", myRestaurantRoute);
 app.use("/api/restaurant", restaurantRoute);
+app.use("/api/order", orderRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
