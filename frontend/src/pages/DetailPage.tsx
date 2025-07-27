@@ -1,3 +1,4 @@
+import { useCreateCheckoutSession } from "@/api/OrderApi";
 import { useGetRestaurant } from "@/api/RestaurantAPI";
 import CheckoutButton from "@/components/CheckoutButton";
 import MenuItem from "@/components/MenuItem";
@@ -21,8 +22,8 @@ export type CartItem = {
 const DetailPage = () => {
   const { restaurantId } = useParams();
   const { restaurant, isLoading } = useGetRestaurant(restaurantId);
-  // const { createCheckoutSession, isLoading: isCheckoutLoading } =
-  //   useCreateCheckoutSession();
+  const { createCheckoutSession, isPending: isCheckoutLoading } =
+    useCreateCheckoutSession();
 
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const storedCartItems = sessionStorage.getItem(`cartItems-${restaurantId}`);
@@ -100,8 +101,8 @@ const DetailPage = () => {
       },
     };
 
-    // const data = await createCheckoutSession(checkoutData);
-    // window.location.href = data.url;
+    const data = await createCheckoutSession(checkoutData);
+    window.location.href = data.url;
   };
 
   if (isLoading || !restaurant) {
@@ -139,7 +140,7 @@ const DetailPage = () => {
               <CheckoutButton
                 disabled={cartItems.length === 0}
                 onCheckout={onCheckout}
-                // isLoading={isCheckoutLoading}
+                isLoading={isCheckoutLoading}
               />
             </CardFooter>
           </Card>
