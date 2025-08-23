@@ -21,8 +21,9 @@ const app = express();
 const PORT = process.env.PORT || 7000;
 
 // middlewares
-app.use(express.json());
 app.use(cors());
+app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
+app.use(express.json());
 
 //database connection
 mongoose

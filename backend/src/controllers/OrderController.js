@@ -1,9 +1,42 @@
 const Stripe = require("stripe")
 const Restaurant = require("../models/restaurant");
+const Order = require("../models/order");
 
 
 const STRIPE = new Stripe(process.env.STRIPE_SECRET_KEY);
 const FRONTEND_URL = process.env.FRONTEND_URL;
+const STRIPE_ENDPOINT_SECRET = process.env.STRIPE_WEBHOOK_SECRET
+
+const stripeWebhookHandler = async (req, res) => {
+    let event;
+
+    try {
+        const sig = req.headers["stripe-signature"];
+        event = STRIPE.webhooks.constructEvent(
+            req.body,
+            sig,
+            STRIPE_ENDPOINT_SECRET
+        );
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send(`Webhook error: ${error.message}`);
+    }
+
+    if (event.type === "checkout.session.completed") {
+        const order = await Order.findById(event.data.object.metadata?.orderId);
+
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+
+        order.totalAmount = event.data.object.amount_total;
+        order.status = "paid";
+
+        await order.save();
+    }
+
+    res.status(200).send();
+};
 
 const createCheckoutSession = async (req, res) => {
     try {
@@ -112,4 +145,4 @@ const createSession = async (
     return sessionData;
 };
 
-module.exports = { createCheckoutSession }
+module.exports = { createCheckoutSession, stripeWebhookHandler }
