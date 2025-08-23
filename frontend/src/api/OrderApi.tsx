@@ -47,7 +47,7 @@ export const useCreateCheckoutSession = () => {
   };
 
   const {
-    mutate: createCheckoutSession,
+    mutateAsync: createCheckoutSession,
     isPending,
     isError,
     reset,
