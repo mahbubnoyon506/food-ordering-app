@@ -10,6 +10,7 @@ import ManageRestaurant from "./pages/ManageRestaurant";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
 import OrderStatusPage from "./pages/OrderStatusPage";
+import ManageRestaurantPage from "./pages/ManageRestaurantPage";
 
 const AppRoute = () => {
   return (
@@ -37,6 +38,14 @@ const AppRoute = () => {
           element={
             <Layout>
               <OrderStatusPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/manage-restaurant"
+          element={
+            <Layout>
+              <ManageRestaurantPage />
             </Layout>
           }
         />
