@@ -1,7 +1,7 @@
 import { useCreateCheckoutSession } from "@/api/OrderApi";
 import { useGetRestaurant } from "@/api/RestaurantAPI";
 import CheckoutButton from "@/components/CheckoutButton";
-import MenuItem from "@/components/MenuItem";
+import MenuItems from "@/components/MenuItems";
 
 import OrderSummary from "@/components/OrderSummary";
 import RestaurantInfo from "@/components/RestaurantInfo";
@@ -122,7 +122,7 @@ const DetailPage = () => {
           <RestaurantInfo restaurant={restaurant} />
           <span className="text-2xl font-bold tracking-tight">Menu</span>
           {restaurant.menuItems.map((menuItem) => (
-            <MenuItem
+            <MenuItems
               menuItem={menuItem}
               addToCart={() => addToCart(menuItem)}
             />
